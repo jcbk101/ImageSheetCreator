@@ -1252,17 +1252,16 @@ void __fastcall TSheetsForm::delItemsClick(TObject *Sender)
 				//msgForm->DisposeOf();
 			}
 		}
+
+		//Clear selections
+		selectionsList->Clear();
+	
+		//Adjust the rows to match columns and image count	
+		equalizeGrid();
+	
+		//Updates
+		showInformation();
 	}
-
-	//Clear selections
-	selectionsList->Clear();
-
-	//Adjust the rows to match columns and image count
-	equalizeGrid();
-
-	//Updates
-	showInformation();
-
 }
 
 

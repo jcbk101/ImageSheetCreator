@@ -1,0 +1,41 @@
+object texAtlasForm: TtexAtlasForm
+  Left = 0
+  Top = 0
+  BorderIcons = [biSystemMenu, biMinimize]
+  Caption = 'Texture Atlas'
+  ClientHeight = 619
+  ClientWidth = 752
+  Position = MainFormCenter
+  FormStyle = StayOnTop
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  DesignerMasterStyle = 0
+  object FOpen: TOpenDialog
+    Options = [ofHideReadOnly, ofPathMustExist, ofFileMustExist, ofEnableSizing]
+    Left = 248
+    Top = 312
+  end
+  object ListBox1: TListBox
+    Align = Client
+    EnableDragHighlight = False
+    Size.Width = 752.000000000000000000
+    Size.Height = 619.000000000000000000
+    Size.PlatformDefault = False
+    StyleLookup = 'ListBox1Style1'
+    TabOrder = 2
+    OnDblClick = ListBox1DblClick
+    AlternatingRowBackground = True
+    CanFocus = False
+    Columns = 5
+    DisableFocusEffect = True
+    ItemHeight = 128.000000000000000000
+    ItemWidth = 128.000000000000000000
+    DefaultItemStyles.ItemStyle = ''
+    DefaultItemStyles.GroupHeaderStyle = ''
+    DefaultItemStyles.GroupFooterStyle = ''
+    Viewport.Width = 752.000000000000000000
+    Viewport.Height = 619.000000000000000000
+  end
+end

@@ -1,0 +1,45 @@
+inherited SheetsForm_Windows: TSheetsForm_Windows
+  DesignerMasterStyle = 0
+  inherited Panel1: TPanel
+    inherited GridPanelLayout1: TGridPanelLayout
+      ControlCollection = <
+        item
+          Column = 0
+          Control = Edit1
+          Row = 0
+        end
+        item
+          Column = 0
+          Control = Label1
+          Row = 1
+        end
+        item
+          Column = 1
+          Control = colNum
+          Row = 1
+        end
+        item
+          Column = 0
+          Control = Label2
+          Row = 2
+        end
+        item
+          Column = 1
+          Control = rowNum
+          Row = 2
+        end>
+      inherited Edit1: TEdit
+        Size.Width = 116.500000000000000000
+      end
+      inherited Label1: TLabel
+        TabOrder = 6
+      end
+      inherited Label2: TLabel
+        Size.Height = 25.000000000000000000
+      end
+      inherited rowNum: TSpinBox
+        Size.Height = 25.000000000000000000
+      end
+    end
+  end
+end

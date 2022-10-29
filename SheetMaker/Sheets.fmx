@@ -1,0 +1,1565 @@
+object SheetsForm: TSheetsForm
+  Left = 360
+  Top = 180
+  Caption = 'Image Sheet Creator'
+  ClientHeight = 772
+  ClientWidth = 1120
+  Fill.Bitmap.Bitmap.PNG = {
+    89504E470D0A1A0A0000000D4948445200000020000000200806000000737A7A
+    F4000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+    0032494441545847EDCEA101002010C4B083C96F7330ECF082D4D466B53D196C
+    BF8F0500000000000000000000000000F03B20B94F7A02BFC3F277FC00000000
+    49454E44AE426082}
+  Fill.Bitmap.WrapMode = Tile
+  Fill.Kind = Bitmap
+  Position = ScreenCenter
+  StyleBook = StyleBook1
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnClose = FormClose
+  OnResize = FormResize
+  Left = 360
+  Top = 180
+  DesignerMasterStyle = 0
+  object animRect: TRectangle
+    Fill.Kind = None
+    Position.X = 713.000000000000000000
+    Position.Y = 274.000000000000000000
+    Size.Width = 256.000000000000000000
+    Size.Height = 256.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Color = claGreen
+    object animator: TRectangle
+      Align = Client
+      Size.Width = 256.000000000000000000
+      Size.Height = 256.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+    end
+    object animFrame: TPanel
+      Align = Client
+      Size.Width = 256.000000000000000000
+      Size.Height = 256.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'myLayoutStyle'
+      TabOrder = 0
+      OnMouseWheel = imgListMouseWheel
+    end
+  end
+  object gridParent: TRectangle
+    Fill.Kind = None
+    Position.X = 296.000000000000000000
+    Position.Y = 88.000000000000000000
+    Size.Width = 353.000000000000000000
+    Size.Height = 321.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Color = claRed
+    OnDblClick = gridParentDblClick
+    OnMouseDown = gridParentMouseDown
+    OnMouseMove = imgListMouseMove
+    OnMouseWheel = imgListMouseWheel
+    object imgGrid: TGridLayout
+      Align = Client
+      EnableDragHighlight = False
+      HitTest = False
+      ItemHeight = 64.000000000000000000
+      ItemWidth = 64.000000000000000000
+      Orientation = Horizontal
+      Size.Width = 353.000000000000000000
+      Size.Height = 321.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 8
+    end
+    object centerGrid: TGridLayout
+      Align = Client
+      Cursor = crHandPoint
+      EnableDragHighlight = False
+      HitTest = False
+      ItemHeight = 412.000000000000000000
+      ItemWidth = 412.000000000000000000
+      Orientation = Horizontal
+      Size.Width = 353.000000000000000000
+      Size.Height = 321.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 9
+    end
+  end
+  object MainMenu1: TMainMenu
+    Images = ImageList1
+    Left = 629
+    Top = 32
+    object MenuItem1: TMenuItem
+      Text = '&File'
+      object loadImg: TMenuItem
+        Locked = True
+        ShortCut = 16463
+        Text = 'L&oad Images'
+        OnClick = loadImgClick
+      end
+      object MenuItem2: TMenuItem
+        Locked = True
+        Text = '-'
+      end
+      object exitApp: TMenuItem
+        Locked = True
+        Text = 'E&xit'
+        OnClick = exitAppClick
+      end
+    end
+    object MenuItem4: TMenuItem
+      Text = '&Edit'
+      object exportImage: TMenuItem
+        Locked = True
+        ShortCut = 16464
+        Text = 'Ex&port Sprite Sheet'
+        OnClick = exportImageClick
+      end
+      object MenuItem5: TMenuItem
+        Locked = True
+        Text = '-'
+      end
+      object imageCrop: TMenuItem
+        Locked = True
+        ShortCut = 16468
+        Text = 'Trim bottom pixels of selected frames'
+        OnClick = imageCropClick
+      end
+    end
+    object viewMenu: TMenuItem
+      Text = '&View'
+      object alignToWindow: TMenuItem
+        Locked = True
+        ShortCut = 116
+        Text = 'Center frames in window'
+        OnClick = alignToWindowClick
+      end
+      object MenuItem8: TMenuItem
+        Locked = True
+        Text = '-'
+      end
+      object MenuItem3: TMenuItem
+        Locked = True
+        Text = 'Background'
+        object white: TMenuItem
+          Locked = True
+          GroupIndex = 2
+          RadioItem = True
+          Text = 'White '
+          ImageIndex = 13
+          OnClick = blackClick
+        end
+        object gray: TMenuItem
+          Locked = True
+          GroupIndex = 2
+          RadioItem = True
+          IsChecked = True
+          Text = 'Gray'
+          ImageIndex = 11
+          OnClick = blackClick
+        end
+        object black: TMenuItem
+          Locked = True
+          GroupIndex = 2
+          RadioItem = True
+          Text = 'Black'
+          ImageIndex = 10
+          OnClick = blackClick
+        end
+        object chkboard: TMenuItem
+          Locked = True
+          GroupIndex = 2
+          RadioItem = True
+          Text = 'Checker Board'
+          ImageIndex = 12
+          OnClick = blackClick
+        end
+      end
+      object borderColorMenu: TMenuItem
+        Locked = True
+        Text = 'Border Color'
+      end
+    end
+    object runMenu: TMenuItem
+      Text = 'Run'
+      object runAnimation: TMenuItem
+        Locked = True
+        ShortCut = 120
+        Text = 'Run Animation'
+        OnClick = runAnimationClick
+      end
+    end
+  end
+  object FOpen: TOpenDialog
+    Filter = 'PNG Files|*.png'
+    Options = [ofHideReadOnly, ofAllowMultiSelect, ofPathMustExist, ofFileMustExist, ofEnableSizing]
+    Left = 578
+    Top = 32
+  end
+  object StyleBook1: TStyleBook
+    Styles = <
+      item
+      end
+      item
+        Platform = 'Windows 10 Desktop'
+        ResourcesBin = {
+          464D585F5354594C4520322E3501060B6D79477269645374796C65034C01060D
+          6D795370656564427574746F6E03C502060D6D794C61796F75745374796C6503
+          CA03005450463007544C61796F757400095374796C654E616D65060B6D794772
+          69645374796C6505416C69676E070643656E7465720A53697A652E5769647468
+          0500000000000080D607400B53697A652E4865696768740500000000000080F0
+          07401453697A652E506C6174666F726D44656661756C74080756697369626C65
+          08085461624F726465720217000A5452656374616E676C6500095374796C654E
+          616D65060F52656374616E676C65315374796C6505416C69676E0706436C6965
+          6E7413456E61626C6544726167486967686C69676874080A46696C6C2E436F6C
+          6F720707636C61477261790748697454657374080A53697A652E576964746805
+          00000000000080D607400B53697A652E4865696768740500000000000080F007
+          401453697A652E506C6174666F726D44656661756C74080C5374726F6B652E43
+          6F6C6F720706636C615265640000005450463007544C61796F75740009537479
+          6C654E616D65060D6D795370656564427574746F6E05416C69676E070643656E
+          7465720756697369626C6508085461624F726465720241000A5452656374616E
+          676C6500095374796C654E616D65060A6261636B67726F756E6405416C69676E
+          0706436C69656E740946696C6C2E4B696E6407084772616469656E741446696C
+          6C2E4772616469656E742E506F696E74730E0105436F6C6F720708636C615768
+          697465064F66667365740500000000000000000000000105436F6C6F72070978
+          4646463046304630064F6666736574050000000000000080FE3F000105436F6C
+          6F720709784646443444344434064F6666736574050000000000000080FF3F00
+          00064C6F636B6564090748697454657374080A53697A652E5769647468050000
+          0000000000C804400B53697A652E4865696768740500000000000000C8044014
+          53697A652E506C6174666F726D44656661756C74080C5374726F6B652E436F6C
+          6F720709784646443444344434001054496E6E6572476C6F7745666665637400
+          08536F66746E657373050000000000CDCCCCFD3F09476C6F77436F6C6F720709
+          784646344634383438074F7061636974790500000000006666E6FE3F07547269
+          67676572060E4973507265737365643D7472756507456E61626C656408000000
+          0654476C79706800095374796C654E616D65060A676C7970687374796C650C4D
+          617267696E732E4C65667405000000000000008000400B4D617267696E732E54
+          6F7005000000000000008001400D4D617267696E732E52696768740500000000
+          0000008000400E4D617267696E732E426F74746F6D0500000000000000800040
+          05416C69676E070643656E7465720A53697A652E576964746805000000000000
+          008003400B53697A652E48656967687405000000000000008003401453697A65
+          2E506C6174666F726D44656661756C74080000005450463007544C61796F7574
+          00095374796C654E616D65060D6D794C61796F75745374796C6505416C69676E
+          070643656E7465720A53697A652E57696474680500000000000000E606400B53
+          697A652E4865696768740500000000000000CF06401453697A652E506C617466
+          6F726D44656661756C7408085461624F726465720243000A5452656374616E67
+          6C6500095374796C654E616D65060A6D7954696E745265637405416C69676E07
+          06436C69656E7413456E61626C6544726167486967686C69676874080A46696C
+          6C2E436F6C6F720708636C6142726F776E0748697454657374080A53697A652E
+          57696474680500000000000000E606400B53697A652E48656967687405000000
+          00000000CF06401453697A652E506C6174666F726D44656661756C74080C5374
+          726F6B652E436F6C6F720706636C61526564105374726F6B652E546869636B6E
+          6573730500000000000000C0FF3F00000654476C79706800095374796C654E61
+          6D6506076D79476C79706805416C69676E070643656E7465720A53697A652E57
+          696474680500000000000000F003400B53697A652E4865696768740500000000
+          000000F003401453697A652E506C6174666F726D44656661756C740807537472
+          65746368080A496D616765496E646578020006496D6167657307155368656574
+          73466F726D2E496D6167654C6973743100000A5452656374616E676C65000953
+          74796C654E616D6506096D794E756D526563740A46696C6C2E436F6C6F720706
+          636C615265640A53697A652E576964746805000000000000008004400B53697A
+          652E48656967687405000000000000008004401453697A652E506C6174666F72
+          6D44656661756C74080B5374726F6B652E4B696E6407044E6F6E650005545465
+          787400095374796C654E616D6506066D795465787405416C69676E0706436C69
+          656E7413456E61626C6544726167486967686C69676874080748697454657374
+          080A53697A652E576964746805000000000000008004400B53697A652E486569
+          67687405000000000000008004401453697A652E506C6174666F726D44656661
+          756C7408045465787406023235185465787453657474696E67732E466F6E742E
+          46616D696C79060B436F7572696572204E6577165465787453657474696E6773
+          2E466F6E742E53697A650500000000000000E002401A5465787453657474696E
+          67732E466F6E742E5374796C654578740A0D0000000007000000000000000400
+          0000165465787453657474696E67732E466F6E74436F6C6F720708636C615768
+          697465155465787453657474696E67732E576F7264577261700800000000}
+      end>
+    Left = 528
+    Top = 32
+  end
+  object StatusBar1: TStatusBar
+    Align = MostBottom
+    ClipChildren = True
+    ClipParent = True
+    HitTest = False
+    Position.Y = 750.000000000000000000
+    ShowSizeGrip = False
+    Size.Width = 1120.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object scaleTrack: TTrackBar
+      Align = Left
+      CanParentFocus = True
+      Frequency = 0.100000001490116100
+      Max = 2.000000000000000000
+      Min = 0.100000001490116100
+      Orientation = Horizontal
+      Position.X = 70.000000000000000000
+      Position.Y = 2.000000000000000000
+      Size.Width = 294.000000000000000000
+      Size.Height = 19.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Value = 1.000000000000000000
+      OnChange = scaleTrackChange
+    end
+    object Text1: TText
+      Align = MostLeft
+      Size.Width = 70.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Scale:'
+    end
+    object scaleText: TText
+      Align = FitLeft
+      Position.X = 364.000000000000000000
+      Size.Width = 50.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      Text = '100%'
+    end
+    object hintLabel: TButton
+      Align = Client
+      CanFocus = False
+      EnableDragHighlight = False
+      HitTest = False
+      Size.Width = 706.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      TabStop = False
+      Text = 'hintLabel'
+      TextSettings.HorzAlign = Leading
+      TextSettings.Trimming = None
+    end
+  end
+  object Panel1: TPanel
+    Align = Left
+    PopupMenu = PopupMenu1
+    Size.Width = 233.000000000000000000
+    Size.Height = 750.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    object GridPanelLayout1: TGridPanelLayout
+      Align = MostTop
+      Size.Width = 233.000000000000000000
+      Size.Height = 73.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      ColumnCollection = <
+        item
+          Value = 50.000000000000000000
+        end
+        item
+          Value = 50.000000000000000000
+        end>
+      ControlCollection = <
+        item
+          Column = 0
+          ColumnSpan = 2
+          Control = Edit1
+          Row = 0
+        end
+        item
+          Column = 0
+          Control = Label1
+          Row = 1
+        end
+        item
+          Column = 1
+          Control = colNum
+          Row = 1
+        end
+        item
+          Column = 0
+          Control = Label2
+          Row = 2
+        end
+        item
+          Column = 1
+          Control = rowNum
+          Row = 2
+        end>
+      RowCollection = <
+        item
+          SizeStyle = Absolute
+          Value = 25.000000000000000000
+        end
+        item
+          SizeStyle = Absolute
+          Value = 25.000000000000000000
+        end
+        item
+          SizeStyle = Auto
+        end>
+      object Edit1: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Client
+        TabOrder = 3
+        ReadOnly = True
+        Text = 'Grid Settings'
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        TextSettings.HorzAlign = Center
+        Size.Width = 233.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        StyledSettings = [Family, Size, FontColor]
+      end
+      object Label1: TLabel
+        Align = Client
+        Size.Width = 116.500000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Columns'
+        TabOrder = 4
+      end
+      object colNum: TSpinBox
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Client
+        TabOrder = 1
+        Cursor = crIBeam
+        DecimalDigits = 0
+        Min = 1.000000000000000000
+        Value = 5.000000000000000000
+        EnableDragHighlight = False
+        Size.Width = 116.500000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        OnChange = rowNumChange
+        OnClick = padTopClick
+      end
+      object Label2: TLabel
+        Align = Client
+        Size.Width = 116.500000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Rows'
+        TabOrder = 0
+      end
+      object rowNum: TSpinBox
+        Tag = 1
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Client
+        TabOrder = 2
+        Cursor = crIBeam
+        DecimalDigits = 0
+        Min = 1.000000000000000000
+        Value = 5.000000000000000000
+        Size.Width = 116.500000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        OnChange = rowNumChange
+        OnClick = padTopClick
+      end
+    end
+    object Panel2: TPanel
+      Align = Top
+      Position.Y = 73.000000000000000000
+      Size.Width = 233.000000000000000000
+      Size.Height = 183.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      object GridPanelLayout2: TGridPanelLayout
+        Align = Center
+        Size.Width = 150.000000000000000000
+        Size.Height = 150.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        ColumnCollection = <
+          item
+            SizeStyle = Absolute
+            Value = 50.000000000000000000
+          end
+          item
+            SizeStyle = Absolute
+            Value = 50.000000000000000000
+          end
+          item
+            SizeStyle = Absolute
+            Value = 50.000000000000000000
+          end>
+        ControlCollection = <
+          item
+            Column = 0
+            Control = alignTL
+            Row = 0
+          end
+          item
+            Column = 1
+            Control = alignTC
+            Row = 0
+          end
+          item
+            Column = 2
+            Control = alignTR
+            Row = 0
+          end
+          item
+            Column = 0
+            Control = alignLC
+            Row = 1
+          end
+          item
+            Column = 2
+            Control = alignRC
+            Row = 1
+          end
+          item
+            Column = 0
+            Control = alignBL
+            Row = 2
+          end
+          item
+            Column = 1
+            Control = alignBC
+            Row = 2
+          end
+          item
+            Column = 2
+            Control = alignBR
+            Row = 2
+          end
+          item
+            Column = 1
+            Control = alignC
+            Row = 1
+          end>
+        RowCollection = <
+          item
+            SizeStyle = Absolute
+            Value = 50.000000000000000000
+          end
+          item
+            SizeStyle = Absolute
+            Value = 50.000000000000000000
+          end
+          item
+            SizeStyle = Absolute
+            Value = 50.000000000000000000
+          end
+          item
+            SizeStyle = Absolute
+            Value = 50.000000000000000000
+          end>
+        object alignTL: TSpeedButton
+          StaysPressed = True
+          Align = Client
+          GroupName = 'aligners'
+          Images = ImageList1
+          ImageIndex = 8
+          Size.Width = 50.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'mySpeedButton'
+          OnClick = alignTRClick
+          object tlEfx: TMonochromeEffect
+          end
+        end
+        object alignTC: TSpeedButton
+          Tag = 1
+          StaysPressed = True
+          Align = Client
+          GroupName = 'aligners'
+          Images = ImageList1
+          ImageIndex = 4
+          Size.Width = 50.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'mySpeedButton'
+          OnClick = alignTRClick
+          object tcEfx: TMonochromeEffect
+          end
+        end
+        object alignTR: TSpeedButton
+          Tag = 2
+          StaysPressed = True
+          Align = Client
+          GroupName = 'aligners'
+          Images = ImageList1
+          ImageIndex = 6
+          Size.Width = 50.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'mySpeedButton'
+          OnClick = alignTRClick
+          object trEfx: TMonochromeEffect
+          end
+        end
+        object alignLC: TSpeedButton
+          Tag = 3
+          StaysPressed = True
+          Align = Client
+          GroupName = 'aligners'
+          Images = ImageList1
+          ImageIndex = 7
+          Size.Width = 50.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'mySpeedButton'
+          OnClick = alignTRClick
+          object lcEfx: TMonochromeEffect
+          end
+        end
+        object alignRC: TSpeedButton
+          Tag = 5
+          StaysPressed = True
+          Align = Client
+          GroupName = 'aligners'
+          Images = ImageList1
+          ImageIndex = 2
+          Size.Width = 50.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'mySpeedButton'
+          OnClick = alignTRClick
+          object rcEfx: TMonochromeEffect
+          end
+        end
+        object alignBL: TSpeedButton
+          Tag = 6
+          StaysPressed = True
+          Align = Client
+          GroupName = 'aligners'
+          Images = ImageList1
+          ImageIndex = 3
+          Size.Width = 50.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'mySpeedButton'
+          OnClick = alignTRClick
+          object blEfx: TMonochromeEffect
+          end
+        end
+        object alignBC: TSpeedButton
+          Tag = 7
+          StaysPressed = True
+          Align = Client
+          GroupName = 'aligners'
+          Images = ImageList1
+          ImageIndex = 9
+          Size.Width = 50.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'mySpeedButton'
+          OnClick = alignTRClick
+          object bcEfx: TMonochromeEffect
+          end
+        end
+        object alignBR: TSpeedButton
+          Tag = 8
+          StaysPressed = True
+          Align = Client
+          GroupName = 'aligners'
+          Images = ImageList1
+          ImageIndex = 5
+          Size.Width = 50.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'mySpeedButton'
+          OnClick = alignTRClick
+          object brEfx: TMonochromeEffect
+          end
+        end
+        object alignC: TSpeedButton
+          Tag = 4
+          StaysPressed = True
+          Align = Client
+          Anchors = []
+          GroupName = 'aligners'
+          IsPressed = True
+          Images = ImageList1
+          ImageIndex = 1
+          Size.Width = 50.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'mySpeedButton'
+          OnClick = alignTRClick
+          object cEfx: TMonochromeEffect
+          end
+        end
+      end
+      object Edit3: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Top
+        TabOrder = 2
+        ReadOnly = True
+        Text = 'Image Alignment Inside Grid'
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        TextSettings.HorzAlign = Center
+        Size.Width = 233.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        StyledSettings = [Family, Size, FontColor]
+      end
+    end
+    object GridPanelLayout3: TGridPanelLayout
+      Align = Top
+      Position.Y = 256.000000000000000000
+      Size.Width = 233.000000000000000000
+      Size.Height = 150.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 3
+      ColumnCollection = <
+        item
+          Value = 50.000000000000000000
+        end
+        item
+          Value = 50.000000000000000000
+        end>
+      ControlCollection = <
+        item
+          Column = 0
+          ColumnSpan = 2
+          Control = Edit2
+          Row = 0
+        end
+        item
+          Column = 0
+          Control = Label3
+          Row = 1
+        end
+        item
+          Column = 1
+          Control = sheetWidth
+          Row = 1
+        end
+        item
+          Column = 0
+          Control = Label4
+          Row = 2
+        end
+        item
+          Column = 1
+          Control = sheetHeight
+          Row = 2
+        end
+        item
+          Column = 0
+          ColumnSpan = 2
+          Row = 0
+        end
+        item
+          Column = 0
+          ColumnSpan = 2
+          Control = Edit6
+          Row = 3
+        end
+        item
+          Column = 0
+          Control = Label5
+          Row = 4
+        end
+        item
+          Column = 1
+          Control = cellWidth
+          Row = 4
+        end
+        item
+          Column = 0
+          Control = Label6
+          Row = 5
+        end
+        item
+          Column = 1
+          Control = cellHeight
+          Row = 5
+        end>
+      RowCollection = <
+        item
+          SizeStyle = Absolute
+          Value = 25.000000000000000000
+        end
+        item
+          SizeStyle = Absolute
+          Value = 25.000000000000000000
+        end
+        item
+          SizeStyle = Absolute
+          Value = 25.000000000000000000
+        end
+        item
+          SizeStyle = Absolute
+          Value = 25.000000000000000000
+        end
+        item
+          SizeStyle = Absolute
+          Value = 25.000000000000000000
+        end
+        item
+          SizeStyle = Absolute
+          Value = 25.000000000000000000
+        end>
+      object Edit2: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Client
+        TabOrder = 8
+        ReadOnly = True
+        Text = 'Image Sheet Size'
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        TextSettings.HorzAlign = Center
+        Size.Width = 233.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        StyledSettings = [Family, Size, FontColor]
+      end
+      object Label3: TLabel
+        Align = Client
+        Size.Width = 116.500000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Width:'
+        TabOrder = 12
+      end
+      object sheetWidth: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Client
+        TabOrder = 6
+        ReadOnly = True
+        Text = '128'
+        TextSettings.FontColor = claRed
+        Size.Width = 116.500000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        StyledSettings = [Family, Size, Style]
+      end
+      object Label4: TLabel
+        Align = Client
+        Size.Width = 116.500000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Height:'
+        TabOrder = 10
+      end
+      object sheetHeight: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Client
+        TabOrder = 3
+        ReadOnly = True
+        Text = '128'
+        TextSettings.FontColor = claRed
+        Size.Width = 116.500000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        StyledSettings = [Family, Size, Style]
+      end
+      object Edit6: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Client
+        TabOrder = 7
+        ReadOnly = True
+        Text = 'Frame Box Size'
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        TextSettings.HorzAlign = Center
+        Size.Width = 233.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        StyledSettings = [Family, Size, FontColor]
+      end
+      object Label5: TLabel
+        Align = Client
+        Size.Width = 116.500000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Width:'
+        TabOrder = 11
+      end
+      object cellWidth: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Client
+        TabOrder = 5
+        ReadOnly = True
+        Text = '128'
+        TextSettings.FontColor = claRed
+        Size.Width = 116.500000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        StyledSettings = [Family, Size, Style]
+      end
+      object Label6: TLabel
+        Align = Client
+        Size.Width = 116.500000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Height:'
+        TabOrder = 9
+      end
+      object cellHeight: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Client
+        TabOrder = 4
+        ReadOnly = True
+        Text = '128'
+        TextSettings.FontColor = claRed
+        Size.Width = 116.500000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        StyledSettings = [Family, Size, Style]
+      end
+    end
+    object GridPanelLayout4: TGridPanelLayout
+      Align = Top
+      Position.Y = 406.000000000000000000
+      Size.Width = 233.000000000000000000
+      Size.Height = 125.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 4
+      ColumnCollection = <
+        item
+          Value = 50.000000000000000000
+        end
+        item
+          Value = 50.000000000000000000
+        end>
+      ControlCollection = <
+        item
+          Column = 0
+          ColumnSpan = 2
+          Control = Edit4
+          Row = 0
+        end
+        item
+          Column = 0
+          Control = Label7
+          Row = 1
+        end
+        item
+          Column = 1
+          Control = padTop
+          Row = 1
+        end
+        item
+          Column = 0
+          Control = Label8
+          Row = 2
+        end
+        item
+          Column = 1
+          Control = padLeft
+          Row = 2
+        end
+        item
+          Column = 0
+          Control = Label9
+          Row = 3
+        end
+        item
+          Column = 1
+          Control = padRight
+          Row = 3
+        end
+        item
+          Column = 0
+          Control = Label10
+          Row = 4
+        end
+        item
+          Column = 1
+          Control = padBottom
+          Row = 4
+        end>
+      RowCollection = <
+        item
+          SizeStyle = Absolute
+          Value = 25.000000000000000000
+        end
+        item
+          SizeStyle = Absolute
+          Value = 25.000000000000000000
+        end
+        item
+          SizeStyle = Absolute
+          Value = 25.000000000000000000
+        end
+        item
+          SizeStyle = Absolute
+          Value = 25.000000000000000000
+        end
+        item
+          SizeStyle = Absolute
+          Value = 25.000000000000000000
+        end>
+      object Edit4: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Client
+        TabOrder = 10
+        ReadOnly = True
+        Text = 'Frame Box Margins'
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        TextSettings.HorzAlign = Center
+        Size.Width = 233.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        StyledSettings = [Family, Size, FontColor]
+      end
+      object Label7: TLabel
+        Align = Client
+        Size.Width = 116.500000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Top:'
+        TabOrder = 17
+      end
+      object padTop: TSpinBox
+        Tag = 1
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Client
+        TabOrder = 5
+        Cursor = crIBeam
+        DecimalDigits = 0
+        Min = -100.000000000000000000
+        RepeatClick = True
+        Size.Width = 116.500000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        OnChange = padBottomChange
+        OnClick = padTopClick
+      end
+      object Label8: TLabel
+        Align = Client
+        Size.Width = 116.500000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Left:'
+        TabOrder = 16
+      end
+      object padLeft: TSpinBox
+        Tag = 1
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Client
+        TabOrder = 4
+        Cursor = crIBeam
+        DecimalDigits = 0
+        Min = -100.000000000000000000
+        RepeatClick = True
+        Size.Width = 116.500000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        OnChange = padBottomChange
+        OnClick = padTopClick
+      end
+      object Label9: TLabel
+        Align = Client
+        Size.Width = 116.500000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Right:'
+        TabOrder = 15
+      end
+      object padRight: TSpinBox
+        Tag = 2
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Client
+        TabOrder = 3
+        Cursor = crIBeam
+        DecimalDigits = 0
+        Min = -100.000000000000000000
+        RepeatClick = True
+        Size.Width = 116.500000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        OnChange = padBottomChange
+        OnClick = padTopClick
+      end
+      object Label10: TLabel
+        Align = Client
+        Size.Width = 116.500000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Bottom:'
+        TabOrder = 14
+      end
+      object padBottom: TSpinBox
+        Tag = 3
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Client
+        TabOrder = 2
+        Cursor = crIBeam
+        DecimalDigits = 0
+        Min = -100.000000000000000000
+        RepeatClick = True
+        Size.Width = 116.500000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        OnChange = padBottomChange
+        OnClick = padTopClick
+      end
+    end
+    object GridPanelLayout5: TGridPanelLayout
+      Align = Top
+      HitTest = False
+      Position.Y = 531.000000000000000000
+      Size.Width = 233.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      ColumnCollection = <
+        item
+          Value = 50.000000000000000000
+        end
+        item
+          Value = 50.000000000000000000
+        end>
+      ControlCollection = <
+        item
+          Column = 0
+          ColumnSpan = 2
+          Control = testAnimEdit
+          Row = 0
+        end
+        item
+          Column = 0
+          Control = Label11
+          Row = 1
+        end
+        item
+          Column = 1
+          Control = animTime
+          Row = 1
+        end>
+      RowCollection = <
+        item
+          SizeStyle = Absolute
+          Value = 25.000000000000000000
+        end
+        item
+          SizeStyle = Absolute
+          Value = 25.000000000000000000
+        end
+        item
+          SizeStyle = Auto
+        end
+        item
+          Value = 100.000000000000000000
+        end>
+      object testAnimEdit: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Client
+        TabOrder = 1
+        ReadOnly = True
+        Text = 'Test Animation'
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        TextSettings.HorzAlign = Center
+        Size.Width = 233.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        StyledSettings = [Family, Size, FontColor]
+      end
+      object Label11: TLabel
+        Align = Client
+        Size.Width = 116.500000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Time Per Frame (ms)'
+        TabOrder = 2
+      end
+      object animTime: TSpinBox
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Client
+        TabOrder = 0
+        Cursor = crIBeam
+        DecimalDigits = 0
+        Min = 10.000000000000000000
+        Max = 10000.000000000000000000
+        Value = 100.000000000000000000
+        Increment = 10.000000000000000000
+        EnableDragHighlight = False
+        Size.Width = 116.500000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        OnChange = rowNumChange
+        OnClick = padTopClick
+      end
+    end
+  end
+  object Timer1: TTimer
+    Interval = 0
+    OnTimer = Timer1Timer
+    Left = 477
+    Top = 32
+  end
+  object FSave: TSaveDialog
+    Filter = 'PNG Files|*.png'
+    Options = [ofOverwritePrompt, ofHideReadOnly, ofPathMustExist, ofShareAware, ofEnableSizing]
+    Title = 'Export Sprite Sheet'
+    Left = 426
+    Top = 32
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 712
+    Top = 32
+    object selectAll: TMenuItem
+      ShortCut = 16449
+      Text = 'Select All Images'
+      OnClick = selectAllClick
+    end
+    object clearSelection: TMenuItem
+      ShortCut = 27
+      Text = 'Clear Selection'
+      OnClick = clearSelectionClick
+    end
+    object MenuItem6: TMenuItem
+      Text = '-'
+    end
+    object delItems: TMenuItem
+      ShortCut = 46
+      Text = 'Delete Selection'
+      OnClick = delItemsClick
+    end
+  end
+  object ImageList1: TImageList
+    Source = <
+      item
+        MultiResBitmap.Height = 32
+        MultiResBitmap.Width = 32
+        MultiResBitmap.LoadSize = 0
+        MultiResBitmap = <
+          item
+            Width = 32
+            Height = 32
+            PNG = {
+              89504E470D0A1A0A0000000D4948445200000020000000200806000000737A7A
+              F4000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+              011A494441545847ED973D0BC23010862F1AA9AD83830ACEAE2EFD010571F6F7
+              3A8BE0E0E8E2EA2C680711AC62A5E672013FDA581A14977BE0C89B341F2F4DD2
+              A3E04CABB50429531DA81DA999B23A9ED784C5A2AE03B523EE06BE041B600365
+              06848A5E6108215549902EEE477358F9F850810B6DC1F74FA6FE40CA3ACCE7BE
+              D6A35102697AD3FA99240920CBFA4AEDA8A13A3D0882A39A24730A1C4B6FC10A
+              1F4236207426B32513BC5ED7EB000E073AED5569B713683436EA40A6A6E595CB
+              E52C743AC58C66C3F300C2D0542AB25AE122A6524014DD780B8CB2C21FA29FC3
+              06FE9E8ECB0CE0F32EC9373A9D194CA743AD279335C4F158EB3C7B1519C93C65
+              5B8003D17D3E9EEF36E9E27E1F1647F810B281BF1B70E72BBFE700776222BAD9
+              4F54C9800000000049454E44AE426082}
+            FileName = 'C:\Solar2D\BCBProjects\SheetMaker\icons\crosshair.png'
+          end>
+        Name = 'crosshair'
+      end
+      item
+        MultiResBitmap = <
+          item
+            Scale = 2.000000000000000000
+            Width = 32
+            Height = 32
+            PNG = {
+              89504E470D0A1A0A0000000D4948445200000020000000200806000000737A7A
+              F4000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+              00DD494441545847ED96B10D833010457F22790218227D5880C62C914DA8D924
+              4B40C3020C902160020AC7E7A37404675990E29EF4C517507CD9E63E48E0E9E5
+              7E889E89B86F5739C60045C1229F487A80BA06E699453E91F40099D0001A4003
+              68809B97747E3FBCDEB016E87BBED334C030907B797DC8488895CABEAC75708E
+              453EF6CE01D10AB85026D2795E5540D7B16F5B609AD81F651C81750D5BE042A3
+              51A99C495902CBF21F87F0D22D20A2876357190FE1E59FA114FE278CAFC089FF
+              8499D0001A400368801478121A4335CE227FFA24A426F37D1EB4B59A1CE00B23
+              CB92C5B8B235C70000000049454E44AE426082}
+            FileName = 'C:\Solar2D\BCBProjects\SheetMaker\icons\center.png'
+          end>
+        Name = 'center'
+      end
+      item
+        MultiResBitmap = <
+          item
+            Scale = 2.000000000000000000
+            Width = 32
+            Height = 32
+            PNG = {
+              89504E470D0A1A0A0000000D4948445200000020000000200806000000737A7A
+              F4000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+              00B4494441545847ED96A11283400C4417662AB0C09FF40BFA0B7575B86A2C9E
+              BF6D7525DD6D0ED5435E0E91BD7937E10C3B212407273DC996A3E5E6A78E0C89
+              460780AF8199BC12BD0EBC0D641406C2401808036A88570B8BEA4E162E60FD3D
+              0323795B981D124558C8BE06C2336560C385FB8D94D6834C16EE1930039A4E1A
+              109E4A064E5184553F81F45F2CA53828C2EABFA187EC4E98C940B4E2301006C2
+              4075035EB24ED8A50E289A1A9DF043D4FF855E0FE00B1368703CDC9A32340000
+              000049454E44AE426082}
+            FileName = 'C:\Solar2D\BCBProjects\SheetMaker\icons\CR.png'
+          end>
+        Name = 'CR'
+      end
+      item
+        MultiResBitmap = <
+          item
+            Scale = 2.000000000000000000
+            Width = 32
+            Height = 32
+            PNG = {
+              89504E470D0A1A0A0000000D4948445200000020000000200806000000737A7A
+              F4000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+              0096494441545847ED97310E833010041D3A5AE08FD4B4A14FCB2B78451A24BE
+              0369533ABB677788D2E7143BD258D65523E4820B20DE38C2E2343C1EB0CFB61C
+              3862011D3CB213078E58404D14A000052840010A50800214A080EA015C0922F7
+              01FE929319BED275857BBA96850111AB90F9849C7979F9026FB8A56B5116F885
+              97002F0678C2FF78843CB81F7AF2817C0416C0411D42F801A4973BF2D433815C
+              0000000049454E44AE426082}
+            FileName = 'C:\Solar2D\BCBProjects\SheetMaker\icons\BL.png'
+          end>
+        Name = 'BL'
+      end
+      item
+        MultiResBitmap = <
+          item
+            Scale = 2.000000000000000000
+            Width = 32
+            Height = 32
+            PNG = {
+              89504E470D0A1A0A0000000D4948445200000020000000200806000000737A7A
+              F4000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+              00BB494441545847ED96B10DC23014443F4814B4849A8E09D801D6A0A3A66500
+              5A56600D58858E9AD05250983BFBD34522B184DDDC494FBEFC44CA93E5C22333
+              0BA05A5C80CB2C0ECAE509C257A0C1F2E0B460E6A0B5717AA817DF8129967D1C
+              F4CF126C53B533B8A5DA3B27F08A8D87308335080E7BD737BFE10EECC0902CC0
+              013FC5728903B30DB8B21CC19DE59F5901D877EE00DF0D4AF543280109484002
+              12908004242001095417C8895FCB27A071D88B5FCBDFA075D87362F601698D46
+              4D87F61D7F0000000049454E44AE426082}
+            FileName = 'C:\Solar2D\BCBProjects\SheetMaker\icons\TC.png'
+          end>
+        Name = 'TC'
+      end
+      item
+        MultiResBitmap = <
+          item
+            Scale = 2.000000000000000000
+            Width = 32
+            Height = 32
+            PNG = {
+              89504E470D0A1A0A0000000D4948445200000020000000200806000000737A7A
+              F4000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+              00A5494441545847ED97310E80300C030D1B2BF01D24165EC1039859D9F92DF0
+              859034EAD6B581C1965C555E7A8A32D408D2A696925B3DC2D475C030B89BC6B3
+              50807D07AECBDDF79E85029444000210800004200001084000027C0E60BF732B
+              0DB535A9D7E300CED3837104EEDBEFC5C652C30A20226E2D2729B3098835162B
+              0DB535CFC0B2F83D4F20015855B2B612A90CF08B25142B8AB9AB45E979F461DD
+              8204E0D117025E49C345A0B29B7E310000000049454E44AE426082}
+            FileName = 'C:\Solar2D\BCBProjects\SheetMaker\icons\BR.png'
+          end>
+        Name = 'BR'
+      end
+      item
+        MultiResBitmap = <
+          item
+            Scale = 2.000000000000000000
+            Width = 32
+            Height = 32
+            PNG = {
+              89504E470D0A1A0A0000000D4948445200000020000000200806000000737A7A
+              F4000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+              00B249444154584763646060F80FC40306E00E60636602517403BFFEFE03D360
+              07802CF7D212010BD00B6CBBF606EC08FA7A1B0B00870033132383B208174484
+              8640849B95418C870DCC8685005D13A19A183783963837988DEC8074B0086D81
+              2D1047637300BD00C893FF810EF81FA02B06C6C0840F0AF9FF039E08471D30EA
+              8051078C3A60D401A30E1875C0A803461D30EA80017700BD00B8590EEC81819B
+              E3B0263908D33504FEFEFB0FEE8C203A240C0C00112A386B731AD00200000000
+              49454E44AE426082}
+            FileName = 'C:\Solar2D\BCBProjects\SheetMaker\icons\TR.png'
+          end>
+        Name = 'TR'
+      end
+      item
+        MultiResBitmap = <
+          item
+            Scale = 2.000000000000000000
+            Width = 32
+            Height = 32
+            PNG = {
+              89504E470D0A1A0A0000000D4948445200000020000000200806000000737A7A
+              F4000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+              00A3494441545847ED972112C2401004F77058E08F686CF0BC0387E30B7C0834
+              02B1F46CC505E46D4E6C77ED55E45472994B0CFCCF1C99EE6CB434DCCF6E3193
+              08B0C3E7EC093389006B52012A4005A8008D7155B05A509CF182A0E5AE8BDE28
+              80BB79CC64D3AF83A9DB2CEEC0156FD89B077E7011208B03BE70BC4D98FD08C4
+              589B70A4D730EF9B704D2A4005A8001540D0C72DDA50C3CF697E1352C17136CB
+              37E661F605319992D0723A21990000000049454E44AE426082}
+            FileName = 'C:\Solar2D\BCBProjects\SheetMaker\icons\CL.png'
+          end>
+        Name = 'CL'
+      end
+      item
+        MultiResBitmap = <
+          item
+            Scale = 2.000000000000000000
+            Width = 32
+            Height = 32
+            PNG = {
+              89504E470D0A1A0A0000000D4948445200000020000000200806000000737A7A
+              F4000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+              00B849444154584763646060F80FC40306C00E60646464E0E3118288D0097CFA
+              F28EE1FFFFFF1007F0F30A33EC9DFB06224327E09C2CC2F0F1F35B0626287FC0
+              0046089CBCB49BE1ECD50360362DC1D2ADFD0C3F7F7D07B3410EF87F66D57F30
+              4E0AAC02254ABA618C1098B6BC9A61DEFA36107329101F0631680D7085403A58
+              96C660C013E1A803461D30EA8051078C3A60D401A30E1875C0A803461D30E00E
+              000150E714DC34076176364EBA36CB410066213AA68303181800EF22649D11B2
+              7EAD0000000049454E44AE426082}
+            FileName = 'C:\Solar2D\BCBProjects\SheetMaker\icons\TL.png'
+          end>
+        Name = 'TL'
+      end
+      item
+        MultiResBitmap = <
+          item
+            Scale = 2.000000000000000000
+            Width = 32
+            Height = 32
+            PNG = {
+              89504E470D0A1A0A0000000D4948445200000020000000200806000000737A7A
+              F4000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+              00D34944415458476320031803F17F1C182447126082D2240356A04E610E0806
+              B1C905646B75946260781307C12036B98002B753078C3A60D401A30E1875C0A8
+              03461D30EA8051078C3A60D40103EE0046204E8730890672405CE526C3C0B0D3
+              0B22E0BE8D8161D71330B30D881F815924006C3D1C8218E880FFFFD32018C4C6
+              A686180C0A81FF9C2C0C0C85BA40160940959F8121410DC25E708B81E1F64708
+              9B58D07F9981E1FB1F4814FC0775AF403D1C7A0291450C0C6F7F0C9244088E07
+              216028D013BC03FA1E9408C00E008B0C0860600000E60846F78122D1AF000000
+              0049454E44AE426082}
+            FileName = 'C:\Solar2D\BCBProjects\SheetMaker\icons\BC.png'
+          end>
+        Name = 'BC'
+      end
+      item
+        MultiResBitmap = <
+          item
+            Scale = 2.000000000000000000
+            Width = 32
+            Height = 32
+            PNG = {
+              89504E470D0A1A0A0000000D4948445200000020000000200806000000737A7A
+              F4000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+              0034494441545847EDCEB10D00200C034187FD774E28D82105F792E5F62A49DF
+              AD75DEAF0500000000000000000000000000F03B20192112013F2B0C07820000
+              000049454E44AE426082}
+            FileName = 'C:\Solar2D\BCBProjects\SheetMaker\icons\black.png'
+          end>
+        Name = 'black'
+      end
+      item
+        MultiResBitmap = <
+          item
+            Scale = 2.000000000000000000
+            Width = 32
+            Height = 32
+            PNG = {
+              89504E470D0A1A0A0000000D4948445200000020000000200806000000737A7A
+              F4000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+              0032494441545847EDCEA101002010C4B083C96F7330ECF082D4D466B53D196C
+              BF8F0500000000000000000000000000F03B20B94F7A02BFC3F277FC00000000
+              49454E44AE426082}
+            FileName = 'C:\Solar2D\BCBProjects\SheetMaker\icons\gray.png'
+          end>
+        Name = 'gray'
+      end
+      item
+        MultiResBitmap = <
+          item
+            Width = 16
+            Height = 16
+            PNG = {
+              89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+              61000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+              003449444154384F634C4B4BFBCF80079C3D7B16CAC20E98A034D960D480C160
+              00A3B1B131DE74009487B2B083D1401C060630300000EFCC06E8531F0EF00000
+              000049454E44AE426082}
+            FileName = 'C:\Solar2D\BCBProjects\SheetMaker\icons\cb_gray.png'
+          end>
+        Name = 'cb_gray'
+      end
+      item
+        MultiResBitmap = <
+          item
+            Scale = 2.000000000000000000
+            Width = 32
+            Height = 32
+            PNG = {
+              89504E470D0A1A0A0000000D4948445200000020000000200806000000737A7A
+              F4000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+              0032494441545847EDCEB101002008C4C0C7FD77060B77A0F0D2A4BDEA5B163B
+              EF6B0100000000000000000000000000FC0E48064D88043CD8FECC0300000000
+              49454E44AE426082}
+            FileName = 'C:\Solar2D\BCBProjects\SheetMaker\icons\white.png'
+          end>
+        Name = 'white'
+      end>
+    Destination = <
+      item
+        Layers = <
+          item
+            Name = 'crosshair'
+            SourceRect.Right = 32.000000000000000000
+            SourceRect.Bottom = 32.000000000000000000
+          end>
+      end
+      item
+        Layers = <
+          item
+            Name = 'center'
+          end>
+      end
+      item
+        Layers = <
+          item
+            Name = 'CR'
+          end>
+      end
+      item
+        Layers = <
+          item
+            Name = 'BL'
+          end>
+      end
+      item
+        Layers = <
+          item
+            Name = 'TC'
+          end>
+      end
+      item
+        Layers = <
+          item
+            Name = 'BR'
+          end>
+      end
+      item
+        Layers = <
+          item
+            Name = 'TR'
+          end>
+      end
+      item
+        Layers = <
+          item
+            Name = 'CL'
+          end>
+      end
+      item
+        Layers = <
+          item
+            Name = 'TL'
+          end>
+      end
+      item
+        Layers = <
+          item
+            Name = 'BC'
+          end>
+      end
+      item
+        Layers = <
+          item
+            Name = 'black'
+          end>
+      end
+      item
+        Layers = <
+          item
+            Name = 'gray'
+          end>
+      end
+      item
+        Layers = <
+          item
+            Name = 'cb_gray'
+          end>
+      end
+      item
+        Layers = <
+          item
+            Name = 'white'
+          end>
+      end>
+    Left = 376
+    Top = 32
+  end
+end

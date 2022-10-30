@@ -379,8 +379,8 @@ void __fastcall TSheetsForm::loadImgClick(TObject *Sender)
 				rect->Hint = FOpen->Files->Strings[i];
 
 				//Align to the CENTER ( Adding a margin )
-				//rect->TagFloat = CENTER;
-				//alignImage(rect, CENTER);
+				rect->TagFloat = CENTER;
+				alignImage(rect, CENTER);
 
 				//
 				//Show the center point of the image using a crosshair
@@ -1319,7 +1319,8 @@ void __fastcall TSheetsForm::imageCropClick(TObject *Sender)
 {
 	if (selectionsList->Count)
 	{
-		int lowest = 0;
+		int  lowest     = 0;
+		bool hasChanged = false;
 
 		for (int i = 0; i < selectionsList->Count; i++)
 		{
@@ -1363,6 +1364,10 @@ void __fastcall TSheetsForm::imageCropClick(TObject *Sender)
 
 							obj->Fill->Bitmap->Bitmap->Assign(dst);
 							alignImage(obj, obj->TagFloat);
+
+							//
+							hasChanged = true;
+
 							break;
 						}
 					}
@@ -1371,6 +1376,34 @@ void __fastcall TSheetsForm::imageCropClick(TObject *Sender)
 				//Done
 				if (low < 0)
 					src->Unmap(bm);
+			}
+		}
+
+		//If changes were made, ask user if they wish
+		//to replace current files with the modified version
+		TmsgForm *msg = new TmsgForm(Application);
+
+		msg->messageText->Text = "Changes made to image selections. Do you wish to save these trimmed files?";
+		msg->Caption = "Save current changes...";
+		msg->confirm1->Text = "Yes";
+		msg->ShowModal();
+
+		//Yes = Replace
+		//No = Save new location
+		//Cancel = true no
+		if (msg->ModalResult == mrYes)
+		{
+			for (int i = 0; i < selectionsList->Count; i++)
+			{
+				int         index = StrToInt(selectionsList->Strings[i]);
+				TRectangle *obj   = dynamic_cast<TRectangle *>(imgGrid->Children->Items[index]);
+
+				if (obj)
+				{
+					TBitmap *save = obj->Fill->Bitmap->Bitmap;
+
+					save->SaveToFile(obj->Hint);
+				}
 			}
 		}
 	}

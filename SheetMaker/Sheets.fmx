@@ -1146,10 +1146,8 @@ object SheetsForm: TSheetsForm
           Value = 25.000000000000000000
         end
         item
-          SizeStyle = Auto
-        end
-        item
-          Value = 100.000000000000000000
+          SizeStyle = Absolute
+          Value = 50.000000000000000000
         end>
       object testAnimEdit: TEdit
         Touch.InteractiveGestures = [LongTap, DoubleTap]

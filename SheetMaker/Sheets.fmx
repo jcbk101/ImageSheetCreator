@@ -50,12 +50,15 @@ object SheetsForm: TSheetsForm
   end
   object gridParent: TRectangle
     Fill.Kind = None
+    Hint = 'Test'
     Position.X = 296.000000000000000000
     Position.Y = 88.000000000000000000
     Size.Width = 353.000000000000000000
     Size.Height = 321.000000000000000000
     Size.PlatformDefault = False
     Stroke.Color = claRed
+    ParentShowHint = False
+    ShowHint = True
     OnDblClick = gridParentDblClick
     OnMouseDown = gridParentMouseDown
     OnMouseMove = imgListMouseMove
@@ -77,8 +80,8 @@ object SheetsForm: TSheetsForm
       Cursor = crHandPoint
       EnableDragHighlight = False
       HitTest = False
-      ItemHeight = 412.000000000000000000
-      ItemWidth = 412.000000000000000000
+      ItemHeight = 128.000000000000000000
+      ItemWidth = 128.000000000000000000
       Orientation = Horizontal
       Size.Width = 353.000000000000000000
       Size.Height = 321.000000000000000000
@@ -206,7 +209,7 @@ object SheetsForm: TSheetsForm
         ResourcesBin = {
           464D585F5354594C4520322E3501060B6D79477269645374796C65034C01060D
           6D795370656564427574746F6E03C502060D6D794C61796F75745374796C6503
-          CA03005450463007544C61796F757400095374796C654E616D65060B6D794772
+          D303005450463007544C61796F757400095374796C654E616D65060B6D794772
           69645374796C6505416C69676E070643656E7465720A53697A652E5769647468
           0500000000000080D607400B53697A652E4865696768740500000000000080F0
           07401453697A652E506C6174666F726D44656661756C74080756697369626C65
@@ -256,19 +259,20 @@ object SheetsForm: TSheetsForm
           65746368080A496D616765496E646578020006496D6167657307155368656574
           73466F726D2E496D6167654C6973743100000A5452656374616E676C65000953
           74796C654E616D6506096D794E756D526563740A46696C6C2E436F6C6F720706
-          636C615265640A53697A652E576964746805000000000000008004400B53697A
-          652E48656967687405000000000000008004401453697A652E506C6174666F72
-          6D44656661756C74080B5374726F6B652E4B696E6407044E6F6E650005545465
-          787400095374796C654E616D6506066D795465787405416C69676E0706436C69
-          656E7413456E61626C6544726167486967686C69676874080748697454657374
-          080A53697A652E576964746805000000000000008004400B53697A652E486569
-          67687405000000000000008004401453697A652E506C6174666F726D44656661
-          756C7408045465787406023235185465787453657474696E67732E466F6E742E
-          46616D696C79060B436F7572696572204E6577165465787453657474696E6773
-          2E466F6E742E53697A650500000000000000E002401A5465787453657474696E
-          67732E466F6E742E5374796C654578740A0D0000000007000000000000000400
-          0000165465787453657474696E67732E466F6E74436F6C6F720708636C615768
-          697465155465787453657474696E67732E576F7264577261700800000000}
+          636C615265640748697454657374080A53697A652E5769647468050000000000
+          00008004400B53697A652E48656967687405000000000000008004401453697A
+          652E506C6174666F726D44656661756C74080B5374726F6B652E4B696E640704
+          4E6F6E650005545465787400095374796C654E616D6506066D79546578740541
+          6C69676E0706436C69656E7413456E61626C6544726167486967686C69676874
+          080748697454657374080A53697A652E57696474680500000000000000800440
+          0B53697A652E48656967687405000000000000008004401453697A652E506C61
+          74666F726D44656661756C740804546578740602323518546578745365747469
+          6E67732E466F6E742E46616D696C79060B436F7572696572204E657716546578
+          7453657474696E67732E466F6E742E53697A650500000000000000E002401A54
+          65787453657474696E67732E466F6E742E5374796C654578740A0D0000000007
+          0000000000000004000000165465787453657474696E67732E466F6E74436F6C
+          6F720708636C615768697465155465787453657474696E67732E576F72645772
+          61700800000000}
       end>
     Left = 528
     Top = 32
@@ -393,6 +397,7 @@ object SheetsForm: TSheetsForm
         Touch.InteractiveGestures = [LongTap, DoubleTap]
         Align = Client
         TabOrder = 3
+        TabStop = False
         ReadOnly = True
         Text = 'Grid Settings'
         TextSettings.Font.StyleExt = {00070000000000000004000000}
@@ -409,11 +414,12 @@ object SheetsForm: TSheetsForm
         Size.PlatformDefault = False
         Text = 'Columns'
         TabOrder = 4
+        TabStop = False
       end
       object colNum: TSpinBox
         Touch.InteractiveGestures = [LongTap, DoubleTap]
         Align = Client
-        TabOrder = 1
+        TabOrder = 0
         Cursor = crIBeam
         DecimalDigits = 0
         Min = 1.000000000000000000
@@ -431,13 +437,14 @@ object SheetsForm: TSheetsForm
         Size.Height = 22.000000000000000000
         Size.PlatformDefault = False
         Text = 'Rows'
-        TabOrder = 0
+        TabOrder = 2
+        TabStop = False
       end
       object rowNum: TSpinBox
         Tag = 1
         Touch.InteractiveGestures = [LongTap, DoubleTap]
         Align = Client
-        TabOrder = 2
+        TabOrder = 1
         Cursor = crIBeam
         DecimalDigits = 0
         Min = 1.000000000000000000
@@ -679,6 +686,7 @@ object SheetsForm: TSheetsForm
         Touch.InteractiveGestures = [LongTap, DoubleTap]
         Align = Top
         TabOrder = 2
+        TabStop = False
         ReadOnly = True
         Text = 'Image Alignment Inside Grid'
         TextSettings.Font.StyleExt = {00070000000000000004000000}
@@ -790,6 +798,7 @@ object SheetsForm: TSheetsForm
         Touch.InteractiveGestures = [LongTap, DoubleTap]
         Align = Client
         TabOrder = 8
+        TabStop = False
         ReadOnly = True
         Text = 'Image Sheet Size'
         TextSettings.Font.StyleExt = {00070000000000000004000000}
@@ -806,11 +815,13 @@ object SheetsForm: TSheetsForm
         Size.PlatformDefault = False
         Text = 'Width:'
         TabOrder = 12
+        TabStop = False
       end
       object sheetWidth: TEdit
         Touch.InteractiveGestures = [LongTap, DoubleTap]
         Align = Client
         TabOrder = 6
+        TabStop = False
         ReadOnly = True
         Text = '128'
         TextSettings.FontColor = claRed
@@ -826,11 +837,13 @@ object SheetsForm: TSheetsForm
         Size.PlatformDefault = False
         Text = 'Height:'
         TabOrder = 10
+        TabStop = False
       end
       object sheetHeight: TEdit
         Touch.InteractiveGestures = [LongTap, DoubleTap]
         Align = Client
         TabOrder = 3
+        TabStop = False
         ReadOnly = True
         Text = '128'
         TextSettings.FontColor = claRed
@@ -843,6 +856,7 @@ object SheetsForm: TSheetsForm
         Touch.InteractiveGestures = [LongTap, DoubleTap]
         Align = Client
         TabOrder = 7
+        TabStop = False
         ReadOnly = True
         Text = 'Frame Box Size'
         TextSettings.Font.StyleExt = {00070000000000000004000000}
@@ -859,11 +873,13 @@ object SheetsForm: TSheetsForm
         Size.PlatformDefault = False
         Text = 'Width:'
         TabOrder = 11
+        TabStop = False
       end
       object cellWidth: TEdit
         Touch.InteractiveGestures = [LongTap, DoubleTap]
         Align = Client
         TabOrder = 5
+        TabStop = False
         ReadOnly = True
         Text = '128'
         TextSettings.FontColor = claRed
@@ -879,11 +895,13 @@ object SheetsForm: TSheetsForm
         Size.PlatformDefault = False
         Text = 'Height:'
         TabOrder = 9
+        TabStop = False
       end
       object cellHeight: TEdit
         Touch.InteractiveGestures = [LongTap, DoubleTap]
         Align = Client
         TabOrder = 4
+        TabStop = False
         ReadOnly = True
         Text = '128'
         TextSettings.FontColor = claRed
@@ -978,7 +996,8 @@ object SheetsForm: TSheetsForm
       object Edit4: TEdit
         Touch.InteractiveGestures = [LongTap, DoubleTap]
         Align = Client
-        TabOrder = 10
+        TabOrder = 8
+        TabStop = False
         ReadOnly = True
         Text = 'Frame Box Margins'
         TextSettings.Font.StyleExt = {00070000000000000004000000}
@@ -994,13 +1013,14 @@ object SheetsForm: TSheetsForm
         Size.Height = 25.000000000000000000
         Size.PlatformDefault = False
         Text = 'Top:'
-        TabOrder = 17
+        TabOrder = 15
+        TabStop = False
       end
       object padTop: TSpinBox
         Tag = 1
         Touch.InteractiveGestures = [LongTap, DoubleTap]
         Align = Client
-        TabOrder = 5
+        TabOrder = 1
         Cursor = crIBeam
         DecimalDigits = 0
         Min = -100.000000000000000000
@@ -1017,13 +1037,14 @@ object SheetsForm: TSheetsForm
         Size.Height = 25.000000000000000000
         Size.PlatformDefault = False
         Text = 'Left:'
-        TabOrder = 16
+        TabOrder = 14
+        TabStop = False
       end
       object padLeft: TSpinBox
         Tag = 1
         Touch.InteractiveGestures = [LongTap, DoubleTap]
         Align = Client
-        TabOrder = 4
+        TabOrder = 2
         Cursor = crIBeam
         DecimalDigits = 0
         Min = -100.000000000000000000
@@ -1040,7 +1061,8 @@ object SheetsForm: TSheetsForm
         Size.Height = 25.000000000000000000
         Size.PlatformDefault = False
         Text = 'Right:'
-        TabOrder = 15
+        TabOrder = 13
+        TabStop = False
       end
       object padRight: TSpinBox
         Tag = 2
@@ -1063,13 +1085,14 @@ object SheetsForm: TSheetsForm
         Size.Height = 25.000000000000000000
         Size.PlatformDefault = False
         Text = 'Bottom:'
-        TabOrder = 14
+        TabOrder = 12
+        TabStop = False
       end
       object padBottom: TSpinBox
         Tag = 3
         Touch.InteractiveGestures = [LongTap, DoubleTap]
         Align = Client
-        TabOrder = 2
+        TabOrder = 5
         Cursor = crIBeam
         DecimalDigits = 0
         Min = -100.000000000000000000
@@ -1131,7 +1154,8 @@ object SheetsForm: TSheetsForm
       object testAnimEdit: TEdit
         Touch.InteractiveGestures = [LongTap, DoubleTap]
         Align = Client
-        TabOrder = 1
+        TabOrder = 0
+        TabStop = False
         ReadOnly = True
         Text = 'Test Animation'
         TextSettings.Font.StyleExt = {00070000000000000004000000}
@@ -1147,12 +1171,13 @@ object SheetsForm: TSheetsForm
         Size.Height = 25.000000000000000000
         Size.PlatformDefault = False
         Text = 'Time Per Frame (ms)'
-        TabOrder = 2
+        TabOrder = 1
+        TabStop = False
       end
       object animTime: TSpinBox
         Touch.InteractiveGestures = [LongTap, DoubleTap]
         Align = Client
-        TabOrder = 0
+        TabOrder = 6
         Cursor = crIBeam
         DecimalDigits = 0
         Min = 10.000000000000000000

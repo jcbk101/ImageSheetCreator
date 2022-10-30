@@ -358,10 +358,13 @@ void __fastcall TSheetsForm::loadImgClick(TObject *Sender)
 				//
 				//-------------------------------------
 				//Create a temp Bitmap to hold image that will be processed
-				TBitmap *    bm    = new TBitmap(FOpen->Files->Strings[i]);
+				//TBitmap *    bm    = new TBitmap(FOpen->Files->Strings[i]);
 				TRectangle * rect  = new TRectangle(SheetsForm); //getRectangle(parent);
 				TPanel *     cross = new TPanel(SheetsForm);
 
+				//
+				//Add the BMP to the list
+				imgGrid->AddObject(rect);
 				//
 				rect->Fill->Kind = TBrushKind::Bitmap;
 				rect->Stroke->Kind = TBrushKind::Solid;
@@ -369,16 +372,15 @@ void __fastcall TSheetsForm::loadImgClick(TObject *Sender)
 				rect->Stroke->Thickness = 1;
 				rect->HitTest = false;
 				rect->Tag = i;
-				rect->Fill->Bitmap->Bitmap->Assign(bm);
+				//rect->Fill->Bitmap->Bitmap->Assign(bm);
+				rect->Fill->Bitmap->Bitmap->LoadFromFile(FOpen->Files->Strings[i]);
 				rect->Fill->Bitmap->WrapMode = TWrapMode::TileOriginal;
 				rect->Align = TAlignLayout::None;
-
-				//Add the BMP to the list
-				imgGrid->AddObject(rect);
+				rect->Hint = FOpen->Files->Strings[i];
 
 				//Align to the CENTER ( Adding a margin )
-				rect->TagFloat = CENTER;
-				alignImage(rect, CENTER);
+				//rect->TagFloat = CENTER;
+				//alignImage(rect, CENTER);
 
 				//
 				//Show the center point of the image using a crosshair
@@ -494,6 +496,12 @@ void __fastcall TSheetsForm::scaleTrackChange(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TSheetsForm::imgListMouseMove(TObject *Sender, TShiftState Shift, float X, float Y)
 {
+	//Multi-Select a cells
+	int adjW = (gridWidth + padLeft->Value + padRight->Value);
+	int adjH = (gridHeight + padTop->Value + padBottom->Value);
+	int x    = X / adjW;
+	int y    = Y / adjH;
+
 	char buf[16];
 	hintLabel->Text = "";
 
@@ -502,12 +510,6 @@ void __fastcall TSheetsForm::imgListMouseMove(TObject *Sender, TShiftState Shift
 
 	if (Shift.Contains(ssShift) && Shift.Contains(ssLeft))
 	{
-		//Multi-Select a cells
-		int adjW = (gridWidth + padLeft->Value + padRight->Value);
-		int adjH = (gridHeight + padTop->Value + padBottom->Value);
-		int x    = X / adjW;
-		int y    = Y / adjH;
-
 		if ((y * colNum->Value + x) < centerGrid->ChildrenCount)
 		{
 			TPanel *obj = dynamic_cast<TPanel *>(centerGrid->Children->Items[y * colNum->Value + x]);
@@ -535,6 +537,18 @@ void __fastcall TSheetsForm::imgListMouseMove(TObject *Sender, TShiftState Shift
 			obj->Position->Y += (Y - obj->PressedPosition.y) * scaleTrack->Value;
 		}
 	}
+	//else
+	//{
+	//if ((y * colNum->Value + x) < centerGrid->ChildrenCount)
+	//{
+	//TRectangle *obj = dynamic_cast<TRectangle *>(imgGrid->Children->Items[y * colNum->Value + x]);
+	//
+	//if (obj)
+	//{
+	//gridParent->Hint = obj->Hint;
+	//}
+	//}
+	//}
 }
 
 
@@ -776,10 +790,11 @@ void __fastcall TSheetsForm::alignImage(TRectangle *img, int alignment)
 	int x    = (colIndex * adjW);
 	int y    = (rowIndex * adjH);
 
-	//int width  = img->Fill->Bitmap->Bitmap->Width;
-	//int height = img->Fill->Bitmap->Bitmap->Height;
-	int width  = img->Width;
-	int height = img->Height;
+
+	int width  = img->Fill->Bitmap->Bitmap->Width;
+	int height = img->Fill->Bitmap->Bitmap->Height;
+	//int width  = img->Width;
+	//int height = img->Height;
 
 
 	switch(alignment)
@@ -918,15 +933,15 @@ void __fastcall TSheetsForm::padBottomChange(TObject *Sender)
 		centerGrid->Width = gridParent->Height;
 		centerGrid->Height = gridParent->Height;
 
-		imgGrid->ItemWidth = (gridWidth);
-		centerGrid->ItemWidth = imgGrid->ItemWidth;
-		imgGrid->ItemHeight = (gridHeight);
-		centerGrid->ItemHeight = imgGrid->ItemHeight;
-
-		//imgGrid->ItemWidth = (gridWidth + padLeft->Value + padRight->Value);
+		//imgGrid->ItemWidth = (gridWidth);
 		//centerGrid->ItemWidth = imgGrid->ItemWidth;
-		//imgGrid->ItemHeight = (gridHeight + padTop->Value + padBottom->Value);
+		//imgGrid->ItemHeight = (gridHeight);
 		//centerGrid->ItemHeight = imgGrid->ItemHeight;
+
+		imgGrid->ItemWidth = (gridWidth + padLeft->Value + padRight->Value);
+		centerGrid->ItemWidth = (gridWidth + padLeft->Value + padRight->Value);
+		imgGrid->ItemHeight = (gridHeight + padTop->Value + padBottom->Value);
+		centerGrid->ItemHeight = (gridHeight + padTop->Value + padBottom->Value);
 
 		//Show updated data
 		showInformation();
@@ -1062,9 +1077,10 @@ void __fastcall TSheetsForm::gridParentDblClick(TObject *Sender)
 
 		if ((y * colNum->Value + x) < imgGrid->ChildrenCount)
 		{
-			TPanel *obj = dynamic_cast<TPanel *>(centerGrid->Children->Items[y * colNum->Value + x]);
+			TPanel *    obj  = dynamic_cast<TPanel *>(centerGrid->Children->Items[y * colNum->Value + x]);
+			TRectangle *rect = dynamic_cast<TRectangle *>(imgGrid->Children->Items[y * colNum->Value + x]);
 
-			if (obj)
+			if (obj && rect)
 			{
 				sprintf(buf, "%005d", obj->Tag);
 
@@ -1076,6 +1092,16 @@ void __fastcall TSheetsForm::gridParentDblClick(TObject *Sender)
 					int color = ((int)gridParent->Stroke->Color & 0x00FFFFFF);
 					color |= (int)(0xFF000000 * obj->TagFloat);
 					obj->StylesData["myTintRect.Fill.Color"] = TValue::From<TAlphaColor>(color);
+
+					//Select the Alignment active on the frame
+					TSpeedButton *buttons[] =
+					{
+						alignTL, alignTC, alignTR,
+						alignLC, alignC, alignRC,
+						alignBL, alignBC, alignBR
+					};
+
+					buttons[(int)rect->TagFloat]->IsPressed = true;
 				}
 				else
 				{
@@ -1252,13 +1278,12 @@ void __fastcall TSheetsForm::delItemsClick(TObject *Sender)
 				//msgForm->DisposeOf();
 			}
 		}
-
 		//Clear selections
 		selectionsList->Clear();
-	
-		//Adjust the rows to match columns and image count	
+
+		//Adjust the rows to match columns and image count
 		equalizeGrid();
-	
+
 		//Updates
 		showInformation();
 	}
@@ -1331,7 +1356,12 @@ void __fastcall TSheetsForm::imageCropClick(TObject *Sender)
 
 						if (low > -1)
 						{
-							obj->Height = low;
+							src->Unmap(bm);
+
+							TBitmap *dst = new TBitmap(src->Width, low);
+							dst->CopyFromBitmap(src, Rect(0,0,src->Width, low), 0, 0);
+
+							obj->Fill->Bitmap->Bitmap->Assign(dst);
 							alignImage(obj, obj->TagFloat);
 							break;
 						}
@@ -1339,7 +1369,8 @@ void __fastcall TSheetsForm::imageCropClick(TObject *Sender)
 				}
 
 				//Done
-				src->Unmap(bm);
+				if (low < 0)
+					src->Unmap(bm);
 			}
 		}
 	}

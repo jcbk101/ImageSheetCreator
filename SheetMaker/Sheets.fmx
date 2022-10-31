@@ -196,7 +196,7 @@ object SheetsForm: TSheetsForm
   end
   object FOpen: TOpenDialog
     Filter = 'PNG Files|*.png'
-    Options = [ofHideReadOnly, ofAllowMultiSelect, ofPathMustExist, ofFileMustExist, ofEnableSizing]
+    Options = [ofHideReadOnly, ofNoChangeDir, ofAllowMultiSelect, ofPathMustExist, ofFileMustExist, ofEnableSizing]
     Left = 578
     Top = 32
   end
@@ -1198,6 +1198,7 @@ object SheetsForm: TSheetsForm
     Top = 32
   end
   object FSave: TSaveDialog
+    DefaultExt = 'png'
     Filter = 'PNG Files|*.png'
     Options = [ofOverwritePrompt, ofHideReadOnly, ofPathMustExist, ofShareAware, ofEnableSizing]
     Title = 'Export Sprite Sheet'

@@ -304,7 +304,7 @@ void __fastcall TSheetsForm::reloadSettingsClick(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TSheetsForm::loadImgClick(TObject *Sender)
 {
-	FOpen->InitialDir = GetCurrentDir();
+//	FOpen->InitialDir = GetCurrentDir();
 
 	if (FOpen->Execute())
 	{
@@ -312,6 +312,12 @@ void __fastcall TSheetsForm::loadImgClick(TObject *Sender)
 		imgGrid->DeleteChildren();
 		centerGrid->DeleteChildren();
 		selectionsList->Clear();
+
+		//
+		padTop->Value = 0;
+		padLeft->Value = 0;
+		padRight->Value = 0;
+		padBottom->Value = 0;
 
 		//REset sizes
 		gridWidth = gridHeight = 0;
@@ -549,6 +555,9 @@ void __fastcall TSheetsForm::imgListMouseMove(TObject *Sender, TShiftState Shift
 	//}
 	//}
 	//}
+
+	//Updates
+	showInformation();
 }
 
 
@@ -691,7 +700,7 @@ void __fastcall TSheetsForm::exportImageClick(TObject *Sender)
 		return;
 	}
 
-	FSave->InitialDir = GetCurrentDir();
+//	FSave->InitialDir = GetCurrentDir();
 
 	if (FSave->Execute())
 	{
@@ -1405,6 +1414,41 @@ void __fastcall TSheetsForm::imageCropClick(TObject *Sender)
 					save->SaveToFile(obj->Hint);
 				}
 			}
+		}
+
+
+		//Re-calculate frame dimensions
+		gridWidth = -1;
+		gridHeight = -1;
+		//
+		for (int i = 0; i < imgGrid->ChildrenCount; i++)
+		{
+			TRectangle *obj = dynamic_cast<TRectangle *>(imgGrid->Children->Items[i]);
+
+			if (obj)
+			{
+				if (obj->Fill->Bitmap->Bitmap->Width > gridWidth)
+					gridWidth = obj->Fill->Bitmap->Bitmap->Width;
+				if (obj->Fill->Bitmap->Bitmap->Height > gridHeight)
+					gridHeight = obj->Fill->Bitmap->Bitmap->Height;
+			}
+		}
+
+		//
+		if (gridHeight > -1 && gridWidth > -1)
+		{
+			//
+			imgGrid->ItemWidth = gridWidth;
+			imgGrid->ItemHeight = gridHeight;
+			centerGrid->ItemWidth = gridWidth;
+			centerGrid->ItemHeight = gridHeight;
+
+			//
+			gridParent->Width = (gridWidth * colNum->Value);
+			gridParent->Height = (gridHeight * rowNum->Value);
+			centerGrid->Width = gridParent->Width;
+			centerGrid->Height = gridParent->Height;
+
 		}
 	}
 }

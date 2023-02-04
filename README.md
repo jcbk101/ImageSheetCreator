@@ -6,7 +6,7 @@
 Create simple Sprite sheet / Image sheets from individual animation frame files. (PNG)
 
 This software is in the early stages of development. It is usable in its current
-state. This tool was created to assist game development using Solar2D by woring for
+state. This tool was created to assist game development using Solar2D by working for
 the exported image files from <b>Brash Monkey's Spriter</b>.
 
 # Building Image Sheet Creator
@@ -27,6 +27,6 @@ If you are willing to improve <b>Image Sheet Creator</b> by contributing code, b
 
 # Creator
 <b>Image Sheet Creator</b> is maintained by me, John Charles, <a href = "https://www.twitter.com/CodeIsLife101">CodeIsLife101</a> on twitter and I can be found
-under the same name here: <a href = "https://t.co/Wx1BfiNx9Y">Shibori Clan: Shib Ninja Token</a> on Telegram, <a href = "https://discord.gg/4FFXcmeg">Discord</a> and our webpage is <a href = "https://shibninja.com/dojo">Shibori Dojo</a>. Feel free to stop by and say hello!
+under the same name here: <a href = "https://t.co/Wx1BfiNx9Y">Shibori Clan: Shib Ninja Token</a> on Telegram, <a href = "https://discord.gg/4FFXcmeg">Discord</a>. Feel free to stop by and say hello!
 
 ![Shibori Clan Logo](logo.png)

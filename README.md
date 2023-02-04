@@ -6,7 +6,7 @@
 Create simple Sprite sheet / Image sheets from individual animation frame files. (PNG)
 
 This software is in the early stages of development. It is usable in its current
-state. Thi stool was created to assist game development using Solar2D by woring for
+state. This tool was created to assist game development using Solar2D by woring for
 the exported image files from <b>Brash Monkey's Spriter</b>.
 
 # Building Image Sheet Creator

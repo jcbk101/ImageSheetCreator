@@ -26,7 +26,7 @@ sized animation frames (Same size Widths and Heights) or maintain the current as
 If you are willing to improve <b>Image Sheet Creator</b> by contributing code, by all means, fork this repository and create a pull request with any desired improvements.
 
 # Creator
-<b>Image Sheet Creator</b> is maintained by me, John, <a href = "https://www.twitter.com/CodeIsLife101">CodeIsLife101</a> on twitter and I can be found
+<b>Image Sheet Creator</b> is maintained by me, John, I can be found
 under the same name here: <a href = "https://t.co/Wx1BfiNx9Y">Shibori Clan: Shib Ninja Token</a> on Telegram, <a href = "https://discord.gg/4FFXcmeg">Discord</a>. Feel free to stop by and say hello!
 
 ![Shibori Clan Logo](logo.png)
